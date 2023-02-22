@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class LightStartPoint : MonoBehaviour
 {
-    [SerializeField] private float lightLineDistance = 100.0f;  // 光の反射探索距離
-    LineRenderer lineRenderer;
+    [SerializeField] private float lightLineDistance = 1000.0f;  // 光の反射探索距離
+    private LineRenderer lineRenderer;
+    [SerializeField] private LayerMask wallLayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,7 @@ public class LightStartPoint : MonoBehaviour
 
         // 終点を取得するためにRayを用いて当たる場所を取得
         RaycastHit rayHitObject;
-        Physics.Raycast(pos1, this.gameObject.transform.forward, out rayHitObject, lightLineDistance);
+        Physics.Raycast(pos1, this.gameObject.transform.forward, out rayHitObject, lightLineDistance, wallLayer);
         Vector3 pos2 = rayHitObject.point;
 
         // 線の始点、終点の指定
@@ -40,7 +42,7 @@ public class LightStartPoint : MonoBehaviour
 
                 // 反射光の計算
                 Vector3 reflectVec = Vector3.Reflect(beforeLightLineVec, rayHitObject.normal);
-                Physics.Raycast(rayHitObject.transform.position, reflectVec, out rayHitObject, lightLineDistance);
+                Physics.Raycast(rayHitObject.transform.position, reflectVec, out rayHitObject, lightLineDistance, wallLayer);
 
                 // 線の始点、終点の指定
                 pos1 = pos2;

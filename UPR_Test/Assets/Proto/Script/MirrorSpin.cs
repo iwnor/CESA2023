@@ -24,7 +24,7 @@ public class MirrorSpin : MonoBehaviour
             
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.tag == "Player")
         {
@@ -32,7 +32,7 @@ public class MirrorSpin : MonoBehaviour
         }
         
     }
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
         if(collision.gameObject.tag == "Player")
         {
