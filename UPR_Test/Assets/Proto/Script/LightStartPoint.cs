@@ -11,7 +11,7 @@ public class LightStartPoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
