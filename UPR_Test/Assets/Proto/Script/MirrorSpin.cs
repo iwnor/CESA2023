@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 
 public class MirrorSpin : MonoBehaviour
 {
-    public bool Istouch = false;
+    bool Istouch = false;
+    public bool Isactive = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +19,35 @@ public class MirrorSpin : MonoBehaviour
         
         var gamepad = Gamepad.current;
         var rightStickValue = gamepad.rightStick.ReadValue();
+        
         if (Istouch == true)
         {
+            if (gamepad.rightShoulder.wasReleasedThisFrame)
+            {
+                if (Isactive == false)
+                {
+                    Isactive = true;
+                }
+                else
+                {
+                    Isactive = false;
+                }
+            }
             this.transform.Rotate(0, rightStickValue.x, 0);
             
+        }
+    }
+    void FixedUpdate()
+    {
+        if(Isactive == true)
+        {
+            transform.GetChild(0).gameObject.tag = "Mirror";
+            this.gameObject.tag = "Mirror";
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.tag = "Untagged";
+            this.gameObject.tag = "Untagged";
         }
     }
     private void OnTriggerEnter(Collider collision)
