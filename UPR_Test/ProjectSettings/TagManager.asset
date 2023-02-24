@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Mirror
+  - Goal
+  - Prism
   layers:
   - Default
   - TransparentFX
