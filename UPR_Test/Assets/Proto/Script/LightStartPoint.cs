@@ -8,6 +8,11 @@ public class LightStartPoint : MonoBehaviour
     private LineRenderer lineRenderer;
     [SerializeField] private LayerMask wallLayer;
 
+    private bool nowPrismHitFlag;
+    private bool oldPrismHitFlag;
+
+    PrismScript hitPrismScript; // 当たったプリズムのスクリプトを保存しておく（消灯のため）
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,8 +56,36 @@ public class LightStartPoint : MonoBehaviour
             }
             else
             {
+                switch (rayHitObject.collider.tag)
+                {
+                    // プリズムに当たった場合拡散させる
+                    case "Prism":
+                        hitPrismScript = rayHitObject.transform.GetComponent<PrismScript>();
+                        hitPrismScript.TurnOnPrismLight(pos2 - pos1);
+                        nowPrismHitFlag = true;
+                        break;
+
+                    // ゴールに当たった場合クリア扱いにする
+                    case "Goal":
+                        break;
+
+                    default:
+                        break;
+                }
+
                 // 反射しないのでループ終了
                 lightLineRefrectEndFlag = false;
+            }
+
+            if(nowPrismHitFlag == false && oldPrismHitFlag == true)
+            { 
+                oldPrismHitFlag = false;
+                hitPrismScript.TurnOffPrismLight();
+            }
+            else if(nowPrismHitFlag == true)
+            {
+                nowPrismHitFlag = false;
+                oldPrismHitFlag = true;
             }
         }
     }
