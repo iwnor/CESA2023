@@ -37,12 +37,24 @@ public class GameManager : MonoBehaviour
         //ゴールしたかどうかで分岐
     }
 
-    public void ReLoadScene()
+    public void ActiveReloadButton()
+    {
+        if (Button.GetComponent<RectTransform>().anchoredPosition == Normal)
+        {
+            Button.GetComponent<RectTransform>().anchoredPosition = Goal;
+        }
+        else
+        {
+            Button.GetComponent<RectTransform>().anchoredPosition = Normal;
+        }
+    }
+
+    private void ReLoadScene()
     {
         //シーン呼び出し
         SceneManager.LoadScene("ProtoScene");
     }
-    public void PushButton()
+    private void PushButton()
     {
         //ボタン押したとき
         ReLoadScene();

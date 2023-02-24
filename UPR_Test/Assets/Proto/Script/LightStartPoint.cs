@@ -10,6 +10,7 @@ public class LightStartPoint : MonoBehaviour
 
     private bool nowPrismHitFlag;
     private bool oldPrismHitFlag;
+    private bool endFlag = false;
 
     PrismScript hitPrismScript; // 当たったプリズムのスクリプトを保存しておく（消灯のため）
 
@@ -67,6 +68,11 @@ public class LightStartPoint : MonoBehaviour
 
                     // ゴールに当たった場合クリア扱いにする
                     case "Goal":
+                        if (endFlag == false)
+                        {
+                            GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>().ActiveReloadButton();
+                            endFlag = true;
+                        }
                         break;
 
                     default:
