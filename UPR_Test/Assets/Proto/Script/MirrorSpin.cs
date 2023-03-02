@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class MirrorSpin : MonoBehaviour
 {
-    bool Istouch = false;
+    public bool Istouch = false;
     public bool Isactive = false;
     // Start is called before the first frame update
     void Start()

@@ -72,6 +72,14 @@ public class LightStartPoint : MonoBehaviour
                         }
                         break;
 
+                    case "Player":
+                        if (endFlag == false)
+                        {
+                            //GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>().ActiveReloadButton();
+                            endFlag = true;
+                        }
+                        break;
+
                     default:
                         break;
                 }
