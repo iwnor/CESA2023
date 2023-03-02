@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CrystalScript : MonoBehaviour
 {
-    [SerializeField] int needLazerNum = 1;  // 破壊に必要なレーザーの本数
+    [SerializeField] private int needLazerNum = 1;  // 破壊に必要なレーザーの本数
+    private int nowLazerNum;    // 当たっているレーザーの本数
 
     // Start is called before the first frame update
     void Start()
@@ -16,5 +17,27 @@ public class CrystalScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void resetLazerNum()
+    {
+        nowLazerNum = 0;
+    }
+
+    public void countUpLazer()
+    {
+        nowLazerNum++;
+    }
+
+    public bool checkBreakLazer()
+    {
+        if(needLazerNum < nowLazerNum)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

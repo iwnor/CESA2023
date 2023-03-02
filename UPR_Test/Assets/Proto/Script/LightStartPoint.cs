@@ -15,7 +15,7 @@ public class LightStartPoint : MonoBehaviour
     private bool oldPrismHitFlag;
     private bool endFlag = false;
 
-    PrismScript hitPrismScript; // 当たったプリズムのスクリプトを保存しておく（消灯のため）
+    private PrismScript hitPrismScript; // 当たったプリズムのスクリプトを保存しておく（消灯のため）
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +64,6 @@ public class LightStartPoint : MonoBehaviour
 
                     // ゴールに当たった場合クリア扱いにする
                     case "Goal":
-                    case "Player":
                         if (endFlag == false)
                         {
                             GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>().ActiveReloadButton();
@@ -109,7 +108,16 @@ public class LightStartPoint : MonoBehaviour
     {
         for(int i = 0;i + 1 < refrectPositions.Count;i++)
         {
-
+            Ray ray = GetComponent<Ray>();
+            ray.origin = refrectPositions[i];
+            ray.direction = refrectPositions[i + 1];
+            foreach (RaycastHit hit in Physics.RaycastAll(ray))
+            {
+                if(hit.collider.tag == "Crystal")
+                {
+                    hit.transform.GetComponent<CrystalScript>().countUpLazer();
+                }
+            }
         }
 
         return false;
