@@ -8,6 +8,7 @@ TagManager:
   - Goal
   - Prism
   - Manager
+  - Crystal
   layers:
   - Default
   - TransparentFX
