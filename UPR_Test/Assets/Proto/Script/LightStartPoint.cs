@@ -108,13 +108,15 @@ public class LightStartPoint : MonoBehaviour
     {
         for(int i = 0;i + 1 < refrectPositions.Count;i++)
         {
-            foreach (RaycastHit hit in Physics.RaycastAll(refrectPositions[i], refrectPositions[i + 1]))
+            Vector3 direction = refrectPositions[i + 1] - refrectPositions[i];
+            foreach (RaycastHit hit in Physics.RaycastAll(refrectPositions[i], direction))
             {
                 Debug.Log(hit.point);
                 if(hit.collider.tag == "Crystal")
                 {
                     hit.transform.GetComponent<CrystalScript>().countUpLazer();
                 }
+                Debug.DrawRay(refrectPositions[i], direction);
             }
         }
 
