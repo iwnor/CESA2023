@@ -31,6 +31,7 @@ public class CrystalScript : MonoBehaviour
 
     public bool checkBreakLazer()
     {
+        Debug.Log(nowLazerNum);
         if(needLazerNum < nowLazerNum)
         {
             return true;

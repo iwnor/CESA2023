@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
 {
     public bool Istouch = false;
     public bool Isactive = false;
+    [SerializeField]private StageManager stagemanager;
     void Start()
     {
         
@@ -22,6 +23,12 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
+            //
+            if(gamepad.buttonSouth.wasReleasedThisFrame)
+            {
+                stagemanager.shotLazers();
+            }
+            
             // スティックの入力を取得
             var leftStickValue = gamepad.leftStick.ReadValue();
             var rightStickValue = gamepad.rightStick.ReadValue();

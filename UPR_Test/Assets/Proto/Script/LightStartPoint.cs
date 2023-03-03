@@ -108,11 +108,9 @@ public class LightStartPoint : MonoBehaviour
     {
         for(int i = 0;i + 1 < refrectPositions.Count;i++)
         {
-            Ray ray = GetComponent<Ray>();
-            ray.origin = refrectPositions[i];
-            ray.direction = refrectPositions[i + 1];
-            foreach (RaycastHit hit in Physics.RaycastAll(ray))
+            foreach (RaycastHit hit in Physics.RaycastAll(refrectPositions[i], refrectPositions[i + 1]))
             {
+                Debug.Log(hit.point);
                 if(hit.collider.tag == "Crystal")
                 {
                     hit.transform.GetComponent<CrystalScript>().countUpLazer();
