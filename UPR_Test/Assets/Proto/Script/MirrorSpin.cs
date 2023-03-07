@@ -7,6 +7,7 @@ public class MirrorSpin : MonoBehaviour
 {
     public bool Istouch = false;
     public bool Isactive = false;
+    [SerializeField] private float turnSpeed = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,7 @@ public class MirrorSpin : MonoBehaviour
                     Isactive = false;
                 }
             }
-            this.transform.Rotate(0, rightStickValue.x, 0);
+            this.transform.Rotate(0, rightStickValue.x * turnSpeed, 0);
             
         }
     }

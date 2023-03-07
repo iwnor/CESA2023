@@ -8,6 +8,9 @@ public class PlayerMove : MonoBehaviour
     public bool Istouch = false;
     public bool Isactive = false;
     [SerializeField]private StageManager stagemanager;
+    [SerializeField] private float moveSpeed = 1.0f;
+    [SerializeField] private float turnSpeed = 1.0f;
+
     void Start()
     {
         
@@ -32,7 +35,7 @@ public class PlayerMove : MonoBehaviour
             // スティックの入力を取得
             var leftStickValue = gamepad.leftStick.ReadValue();
             var rightStickValue = gamepad.rightStick.ReadValue();
-            this.transform.position = new Vector3(this.transform.position.x+(leftStickValue.x/20), this.transform.position.y, this.transform.position.z+(leftStickValue.y/20));
+            this.transform.position = new Vector3(this.transform.position.x+(leftStickValue.x/20) * moveSpeed, this.transform.position.y, this.transform.position.z+(leftStickValue.y/20) * moveSpeed);
             if(Istouch != true)
             {
                 if(gamepad.rightShoulder.wasReleasedThisFrame)
@@ -46,7 +49,7 @@ public class PlayerMove : MonoBehaviour
                         Isactive = true;
                     }
                 }
-                this.transform.Rotate(0, rightStickValue.x, 0);
+                this.transform.Rotate(0, rightStickValue.x * turnSpeed, 0);
             }
         }
            
